@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th,
+      td {
+        border: 1px solid #000;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+    <title>Log UI</title>
+  </head>
+  <body>
+    <div>
+      <label for="searchParam">Search text</label>
+      <input type="text" name="searchParam" id="searchParam" />
+    </div>
+    <div>
+      <label for="level">Level</label>
+      <input type="text" name="level" id="level" />
+    </div>
+    <label for="message">Message</label>
+    <input type="text" name="message" id="message" />
+    <div>
+      <label for="resourceId">Resource Id</label>
+      <input type="text" name="resourceId" id="resourceId" />
+    </div>
+    <div>
+      <label for="traceId">Trace Id</label>
+      <input type="text" name="traceId" id="traceId" />
+    </div>
+    <div>
+      <label for="spanId">Span Id</label>
+      <input type="text" name="spanId" id="spanId" />
+    </div>
+
+    <div>
+      <label for="commit">commit</label>
+      <input type="text" name="commit" id="commit" />
+    </div>
+    <div>
+      <label for="parentResourceId">Parent Resource Id</label>
+      <input type="text" name="parentResourceId" id="parentResourceId" />
+    </div>
+    <div>
+      <label for="timeRangeStart">Time Range Start</label>
+      <input
+        type="datetime-local"
+        step="1"
+        name="timeRangeStart"
+        id="timeRangeStart"
+      />
+    </div>
+    <div>
+      <label for="timeRangeEnd">Time Range End</label>
+      <input
+        type="datetime-local"
+        step="1"
+        name="timeRangeEnd"
+        id="timeRangeEnd"
+      />
+    </div>
+    <button onclick="search()">Search</button>
+
+    <div id="logs_result">
+      <table id="logs_table">
+        <thead>
+          <th>Log Id</th>
+          <th>Log</th>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <script type="text/javascript">
+      function createSearchData() {
+        const filter = {};
+        const fieldArray = [
+          "searchParam",
+          "level",
+          "message",
+          "resourceId",
+          "traceId",
+          "spanId",
+          "commit",
+          "parentResourceId",
+          "timeRangeStart",
+          "timeRangeEnd",
+        ];
+        for (const field of fieldArray) {
+          const value = document.getElementById(field).value;
+          if (value && value.trim() != "") {
+            filter[field] = value;
+          }
+        }
+        return filter;
+      }
+      async function search() {
+        const url = "http://localhost:3000/log/search";
+        const searchData = createSearchData();
+        const response = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(searchData),
+        });
+        const data = await response.json();
+        createTable(data.logs);
+      }
+      function createTable(data) {
+        // Create a table element
+        var table = document.getElementById("logs_table");
+
+        // deleting all previous rows
+        var rowCount = table.rows.length;
+        for (var i = rowCount - 1; i > 0; i--) {
+          table.deleteRow(i);
+        }
+        if (!data || !data.length) {
+          return;
+        }
+        const headers = Object.keys(data[0]);
+        data.forEach((item) => {
+          var row = document.createElement("tr");
+          headers.forEach((header) => {
+            var cell = document.createElement("td");
+            cell.textContent = item[header];
+            row.appendChild(cell);
+          });
+          table.appendChild(row);
+        });
+      }
+    </script>
+  </body>
+</html>
