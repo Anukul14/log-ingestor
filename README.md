@@ -93,7 +93,8 @@ curl 'http://localhost:3000/log/search' \
 ```
 
 Attaching a snapshot of search feature
-![image](https://github.com/dyte-submissions/november-2023-hiring-Anukul14/assets/42563010/8462cadd-1f7e-46d3-8374-c26b4d6420c4)
+![log_Ingestor_demo](https://github.com/Anukul14/log-ingestor/assets/42563010/de496ecb-7887-4fbe-8842-9838904fa9f8)
+
 
 
 Design
@@ -113,7 +114,7 @@ I have created two tables,
  
 a) Offered a web ui for full text search across logs.
 	This is implemented on assumption that the backend is running on localhost:3000, if not so, we might have to change the url 
-	here https://github.com/dyte-submissions/november-2023-hiring-Anukul14/blob/e7d1114c3d5170eb5d6e61bd7f7355d94e7dca11/logs-interface.html#L108
+	here https://github.com/Anukul14/log-ingestor/blob/main/logs-interface.html#L108
 
 b) Ability to add filters on various attributes.
 
@@ -121,7 +122,8 @@ c) Ability to search within date ranges.
 
 I have implemented the search within date ranges.
 Attaching a snapshot of the same.
-![image](https://github.com/dyte-submissions/november-2023-hiring-Anukul14/assets/42563010/3bd104f5-80be-4c9d-848c-36d91a692f1b)
+![log_Ingestor_demo-date-format](https://github.com/Anukul14/log-ingestor/assets/42563010/df841683-5b1c-4811-9c88-c873050443dc)
+
 The input format used is dependent on system hour format, so we might need to offset the time on the basis of AM/PM.
 For timestamp "2023-09-15T18:00:00Z", we need to select "2023-09-15 06.00.00 PM" in the range 
 
