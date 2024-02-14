@@ -122,7 +122,8 @@ c) Ability to search within date ranges.
 
 I have implemented the search within date ranges.
 Attaching a snapshot of the same.
-![log_Ingestor_demo-date-format](https://github.com/Anukul14/log-ingestor/assets/42563010/df841683-5b1c-4811-9c88-c873050443dc)
+![log_Ingestor_demo-date-format](https://github.com/Anukul14/log-ingestor/assets/42563010/d9efb2ad-a5fd-4ef5-ae3b-0c72c38d1f85)
+
 
 The input format used is dependent on system hour format, so we might need to offset the time on the basis of AM/PM.
 For timestamp "2023-09-15T18:00:00Z", we need to select "2023-09-15 06.00.00 PM" in the range 
