@@ -1,5 +1,4 @@
-Hi , I am Anukul Kumar, submitting my project for log ingestor.
-Here is a walkthrough of my submission in this video on youtube
+Here is a quick walkthrough of the project
 
 https://youtu.be/b9Ft3tnpZ6I
 
